@@ -1,19 +1,19 @@
 ﻿namespace JupiterRoverExercise;
 
-public interface IRoverMovementService
+public interface IMovementService
 {
     void ValidateAndExecuteCommandsFromCommandsString(string commandsString);
-    void ValidateCommandsString(string commandsString);
+    (bool,string) ValidateCommandsString(string commandsString);
 }
 
-public class RoverMovementService : IRoverMovementService
+public class MovementService : IMovementService
 {
     public void ValidateAndExecuteCommandsFromCommandsString(string commandsString)
     {
         throw new NotImplementedException();
     }
 
-    public void ValidateCommandsString(string commandsString)
+    public (bool, string) ValidateCommandsString(string commandsString)
     {
         throw new NotImplementedException();
     }
