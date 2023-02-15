@@ -2,36 +2,38 @@
 
 public interface IRover
 {
-    void Move(MovementDirection movementDirection);
-    void Rotate(RotationDirection rotationDirection);
+    void Move(MovementCommand movementDirection);
+    void Rotate(RotationCommand rotationDirection);
 }
+
 public class Rover
 {
-    private readonly Tuple<int, int, Direction> _currentPosition;
-    public Tuple<int, int, Direction> CurrentPosition => _currentPosition;
+    private (int, int, Direction) _currentPosition;
+    public (int, int, Direction) CurrentPosition => _currentPosition;
 
-    public Rover()
+    public Rover((int, int, Direction)? currentPossition = null)
     {
-        _currentPosition = new(0, 0, Direction.N);
+        _currentPosition = currentPossition ?? (0, 0, Direction.N);
     }
 
-    public void Move(MovementDirection movementDirection)
+    public void Move(MovementCommand movementDirection)
     {
         throw new NotImplementedException();
     }
 
-    public void Rotate(RotationDirection rotationDirection)
+    public void Rotate(RotationCommand rotationDirection)
     {
         throw new NotImplementedException();
     }
 }
-public enum MovementDirection
+
+public enum MovementCommand
 {
     F = 1,
     B = -1
 }
 
-public enum RotationDirection
+public enum RotationCommand
 {
     R = 1,
     L = -1
