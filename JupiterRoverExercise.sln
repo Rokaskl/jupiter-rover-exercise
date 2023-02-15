@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JupiterRoverExercise", "JupiterRoverExercise\JupiterRoverExercise.csproj", "{09B4FF86-E746-430B-BD1A-FD94B9B51E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JupiterRoverExercise", "JupiterRoverExercise\JupiterRoverExercise.csproj", "{09B4FF86-E746-430B-BD1A-FD94B9B51E25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JupiterRoverExerciseTests", "JupiterRoverExerciseTests\JupiterRoverExerciseTests.csproj", "{19B33EAB-CADD-4703-B423-AC00F8F340C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{09B4FF86-E746-430B-BD1A-FD94B9B51E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09B4FF86-E746-430B-BD1A-FD94B9B51E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09B4FF86-E746-430B-BD1A-FD94B9B51E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B33EAB-CADD-4703-B423-AC00F8F340C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B33EAB-CADD-4703-B423-AC00F8F340C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B33EAB-CADD-4703-B423-AC00F8F340C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B33EAB-CADD-4703-B423-AC00F8F340C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
