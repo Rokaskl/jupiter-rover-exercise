@@ -1,5 +1,6 @@
 namespace JupiterRoverExerciseTests
 {
+    [TestFixture]
     public class RoverTests
     {
         [Test]
