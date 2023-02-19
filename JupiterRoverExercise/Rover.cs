@@ -16,33 +16,75 @@ public class Rover
         _currentPosition = currentPossition ?? (0, 0, Direction.N);
     }
 
-    public void Move(MovementCommand movementDirection)
+    public void Move(MovementCommand movementcommand)
     {
-        throw new NotImplementedException();
+        switch ((movementcommand, _currentPosition.Item3))
+        {
+            case (MovementCommand.F, Direction.N):
+            case (MovementCommand.B, Direction.S):
+                _currentPosition.Item1++;
+                break;
+            case (MovementCommand.F, Direction.S):
+            case (MovementCommand.B, Direction.N):
+                _currentPosition.Item1--;
+                break;
+            case (MovementCommand.F, Direction.E):
+            case (MovementCommand.B, Direction.W):
+                _currentPosition.Item2++;
+                break;
+            case (MovementCommand.F, Direction.W):
+            case (MovementCommand.B, Direction.E):
+                _currentPosition.Item2--;
+                break;
+
+            default:
+                throw new InvalidOperationException("Invalid movement command or current rover direction");
+        };
     }
 
     public void Rotate(RotationCommand rotationDirection)
     {
-        throw new NotImplementedException();
+        switch ((rotationDirection, _currentPosition.Item3))
+        {
+            case (RotationCommand.R, Direction.N):
+            case (RotationCommand.L, Direction.S):
+                _currentPosition.Item3 = Direction.E;
+                break;
+            case (RotationCommand.R, Direction.E):
+            case (RotationCommand.L, Direction.W):
+                _currentPosition.Item3 = Direction.S;
+                break;
+            case (RotationCommand.R, Direction.S):
+            case (RotationCommand.L, Direction.N):
+                _currentPosition.Item3 = Direction.W;
+                break;
+            case (RotationCommand.R, Direction.W):
+            case (RotationCommand.L, Direction.E):
+                _currentPosition.Item3 = Direction.N;
+                break;
+
+            default:
+                throw new InvalidOperationException("Invalid rotation command or current rover direction");
+        };
     }
 }
 
 public enum MovementCommand
 {
-    F = 1,
-    B = -1
+    F,
+    B
 }
 
 public enum RotationCommand
 {
-    R = 1,
-    L = -1
+    R,
+    L
 }
 
 public enum Direction
 {
-    N = 0,
-    E = 1,
-    S = 2,
-    W = 3
+    N,
+    E,
+    S,
+    W
 }
