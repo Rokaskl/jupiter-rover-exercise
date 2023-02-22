@@ -50,5 +50,39 @@ namespace JupiterRoverExerciseTests
             (int, int, Direction) expectedEndPossition = (endX, endY, endDirection);
             Assert.That(rover.CurrentPosition, Is.EqualTo(expectedEndPossition));
         }
+
+        [Test]
+        [TestCase(0, 0, Direction.N, 1, 0, Direction.N)]
+        [TestCase(-1, 3, Direction.N, 0, 3, Direction.N)]
+        [TestCase(0, 0, Direction.N, -1, 0, Direction.S)]
+        [TestCase(0, 0, Direction.N, 0, 0, Direction.N)]
+        [Parallelizable(ParallelScope.All)]
+        public void ResetPossiton_PassingNewPossition_CorrectPossitionChange(int startingX, int startingY, Direction startingDirection,
+            int endX, int endY, Direction endDirection)
+        {
+            (int, int, Direction) startingPossition = new(startingX, startingY, startingDirection);
+            (int, int, Direction) expectedEndPossition = (endX, endY, endDirection);
+            Rover rover = new(startingPossition);
+
+            rover.ResetPossition(expectedEndPossition);
+
+            Assert.That(rover.CurrentPosition, Is.EqualTo(expectedEndPossition));
+        }
+
+        [Test]
+        [TestCase(0, 0, Direction.N)]
+        [TestCase(-1, 3, Direction.S)]
+        [TestCase(3, 0, Direction.E)]
+        [Parallelizable(ParallelScope.All)]
+        public void ResetPossiton_DefaultNewPossition_CorrectPossitionChange(int startingX, int startingY, Direction startingDirection)
+        {
+            (int, int, Direction) startingPossition = new(startingX, startingY, startingDirection);
+            (int, int, Direction) expectedEndPossition = (0, 0, Direction.N);
+            Rover rover = new(startingPossition);
+
+            rover.ResetPossition(expectedEndPossition);
+
+            Assert.That(rover.CurrentPosition, Is.EqualTo(expectedEndPossition));
+        }
     }
 }

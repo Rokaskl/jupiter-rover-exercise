@@ -128,5 +128,16 @@ namespace JupiterRoverExerciseTests
             roverMock.VerifyGet(x => x.CurrentPosition, Times.Once);
 
         }
+
+        [Test]
+        public void ResetPossition_CallsRoverResetPositionOnce()
+        {
+            var roverMock = new Mock<IRover>();
+            var roverSerive = new RoverService(roverMock.Object);
+
+            roverSerive.ResetPossition();
+
+            roverMock.Verify(x => x.ResetPossition(null), Times.Once);
+        }
     }
 }
