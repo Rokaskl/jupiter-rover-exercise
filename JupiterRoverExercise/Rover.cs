@@ -7,7 +7,7 @@ public interface IRover
     (int, int, Direction) CurrentPosition { get; }
 }
 
-public class Rover
+public class Rover : IRover
 {
     private (int, int, Direction) _currentPosition;
     public (int, int, Direction) CurrentPosition => _currentPosition;
