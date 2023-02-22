@@ -58,8 +58,5 @@ public class RoverService : IRoverService
         !Enum.IsDefined(typeof(MovementCommand), symbol.ToString()) &&
         !Enum.IsDefined(typeof(RotationCommand), symbol.ToString());
 
-    public (int, int, Direction) GetPossition()
-    {
-        throw new NotImplementedException();
-    }
+    public (int, int, Direction) GetPossition() => _rover.CurrentPosition;
 }
