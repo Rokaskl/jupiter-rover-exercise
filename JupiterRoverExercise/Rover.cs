@@ -4,6 +4,7 @@ public interface IRover
 {
     void Move(MovementCommand movementDirection);
     void Rotate(RotationCommand rotationDirection);
+    (int, int, Direction) CurrentPosition { get; }
 }
 
 public class Rover
