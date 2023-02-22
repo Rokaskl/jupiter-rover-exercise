@@ -5,6 +5,7 @@ public interface IRoverService
     void ValidateAndExecuteCommandsFromCommandsString(string commandsString);
     (bool, string) ValidateCommandsString(string commandsString);
     (int,int,Direction) GetPossition();
+    void ResetPossition();
 }
 
 public class RoverService : IRoverService
@@ -59,4 +60,9 @@ public class RoverService : IRoverService
         !Enum.IsDefined(typeof(RotationCommand), symbol.ToString());
 
     public (int, int, Direction) GetPossition() => _rover.CurrentPosition;
+
+    public void ResetPossition()
+    {
+        throw new NotImplementedException();
+    }
 }
