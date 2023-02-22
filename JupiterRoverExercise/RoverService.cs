@@ -63,6 +63,6 @@ public class RoverService : IRoverService
 
     public void ResetPossition()
     {
-        throw new NotImplementedException();
+        _rover.ResetPossition(); 
     }
 }
