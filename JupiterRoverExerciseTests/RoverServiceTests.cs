@@ -1,5 +1,3 @@
-using JupiterRoverExercise;
-using Microsoft.AspNetCore.Components.Routing;
 using Moq;
 
 namespace JupiterRoverExerciseTests
