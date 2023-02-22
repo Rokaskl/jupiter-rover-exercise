@@ -1,16 +1,17 @@
 ﻿namespace JupiterRoverExercise;
 
-public interface IMovementService
+public interface IRoverService
 {
     void ValidateAndExecuteCommandsFromCommandsString(string commandsString);
     (bool, string) ValidateCommandsString(string commandsString);
+    (int,int,Direction) GetPossition();
 }
 
-public class MovementService : IMovementService
+public class RoverService : IRoverService
 {
     private readonly IRover _rover;
 
-    public MovementService(IRover rover)
+    public RoverService(IRover rover)
     {
         _rover = rover;
     }
@@ -56,4 +57,9 @@ public class MovementService : IMovementService
     private static bool IsNotMovementOrRotationCommand(char symbol) =>
         !Enum.IsDefined(typeof(MovementCommand), symbol.ToString()) &&
         !Enum.IsDefined(typeof(RotationCommand), symbol.ToString());
+
+    public (int, int, Direction) GetPossition()
+    {
+        throw new NotImplementedException();
+    }
 }
