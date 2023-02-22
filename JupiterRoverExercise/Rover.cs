@@ -5,6 +5,7 @@ public interface IRover
     void Move(MovementCommand movementDirection);
     void Rotate(RotationCommand rotationDirection);
     (int, int, Direction) CurrentPosition { get; }
+    void ResetPossition((int, int, Direction)? possition = null);
 }
 
 public class Rover : IRover
@@ -67,6 +68,11 @@ public class Rover : IRover
             default:
                 throw new InvalidOperationException("Invalid rotation command or current rover direction");
         };
+    }
+
+    public void ResetPossition((int, int, Direction)? possition = null)
+    {
+        _currentPosition = possition ?? (0, 0, Direction.N);
     }
 }
 
