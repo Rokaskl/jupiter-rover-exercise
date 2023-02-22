@@ -1,10 +1,11 @@
 using JupiterRoverExercise;
+using Microsoft.AspNetCore.Components.Routing;
 using Moq;
 
 namespace JupiterRoverExerciseTests
 {
     [TestFixture]
-    public class MovementServiceTests
+    public class RoverServiceTests
     {
         [Test]
         [TestCase("F")]
@@ -16,9 +17,9 @@ namespace JupiterRoverExerciseTests
         public void ValidateCommandsString_ValidInput_ReturnsTrue(string commandsString)
         {
             var roverMock = new Mock<IRover>();
-            var movementService = new MovementService(roverMock.Object);
+            var roverSerive = new RoverService(roverMock.Object);
 
-            var actualValidationResult = movementService.ValidateCommandsString(commandsString);
+            var actualValidationResult = roverSerive.ValidateCommandsString(commandsString);
 
             (bool, string) expectedValidationResult = new(true, "");
             Assert.That(actualValidationResult, Is.EqualTo(expectedValidationResult));
@@ -36,9 +37,9 @@ namespace JupiterRoverExerciseTests
         public void ValidateCommandsString_InvalidInput_ReturnsFalse(string commandsString)
         {
             var roverMock = new Mock<IRover>();
-            var movementService = new MovementService(roverMock.Object);
+            var roverSerive = new RoverService(roverMock.Object);
 
-            var validationResult = movementService.ValidateCommandsString(commandsString);
+            var validationResult = roverSerive.ValidateCommandsString(commandsString);
 
             Assert.That(validationResult.Item1, Is.EqualTo(false));
         }
@@ -52,9 +53,9 @@ namespace JupiterRoverExerciseTests
         public void ValidateAndExecuteCommandsFromCommandsString_XCommandsBAndF_RoverMoveMethodCalledXTimes(string commandsString)
         {
             var roverMock = new Mock<IRover>();
-            var movementService = new MovementService(roverMock.Object);
+            var roverSerive = new RoverService(roverMock.Object);
 
-            movementService.ValidateAndExecuteCommandsFromCommandsString(commandsString);
+            roverSerive.ValidateAndExecuteCommandsFromCommandsString(commandsString);
 
             roverMock.Verify(x => x.Move(MovementCommand.B), Times.Exactly(commandsString.Length / 2));
             roverMock.Verify(x => x.Move(MovementCommand.F), Times.Exactly(commandsString.Length / 2));
@@ -69,9 +70,9 @@ namespace JupiterRoverExerciseTests
         public void ValidateAndExecuteCommandsFromCommandsString_XCommandsLAndR_RoverRotateMethodCalledXTimes(string commandsString)
         {
             var roverMock = new Mock<IRover>();
-            var movementService = new MovementService(roverMock.Object);
+            var roverSerive = new RoverService(roverMock.Object);
 
-            movementService.ValidateAndExecuteCommandsFromCommandsString(commandsString);
+            roverSerive.ValidateAndExecuteCommandsFromCommandsString(commandsString);
 
             roverMock.Verify(x => x.Rotate(RotationCommand.L), Times.Exactly(commandsString.Length / 2));
             roverMock.Verify(x => x.Rotate(RotationCommand.R), Times.Exactly(commandsString.Length / 2));
@@ -88,13 +89,13 @@ namespace JupiterRoverExerciseTests
         public void ValidateAndExecuteCommandsFromCommandsString_ValidXCommands_RoverRotateAndMoveMethodsCalledXTimes(string commandsString)
         {
             var roverMock = new Mock<IRover>();
-            var movementService = new MovementService(roverMock.Object);
+            var roverSerive = new RoverService(roverMock.Object);
             var Ls = commandsString.Count(x => x.Equals('L'));
             var Rs = commandsString.Count(x => x.Equals('R'));
             var Fs = commandsString.Count(x => x.Equals('F'));
             var Bs = commandsString.Count(x => x.Equals('B'));
 
-            movementService.ValidateAndExecuteCommandsFromCommandsString(commandsString);
+            roverSerive.ValidateAndExecuteCommandsFromCommandsString(commandsString);
 
             roverMock.Verify(x => x.Rotate(RotationCommand.L), Times.Exactly(Ls));
             roverMock.Verify(x => x.Rotate(RotationCommand.R), Times.Exactly(Rs));
@@ -113,9 +114,21 @@ namespace JupiterRoverExerciseTests
         public void ValidateAndExecuteCommandsFromCommandsString_InValidCommands_ThrowsInvalidCommandsListException(string commandsString)
         {
             var roverMock = new Mock<IRover>();
-            var movementService = new MovementService(roverMock.Object);
+            var roverSerive = new RoverService(roverMock.Object);
 
-            Assert.That(() => movementService.ValidateAndExecuteCommandsFromCommandsString(commandsString),Throws.Exception.TypeOf<InvalidCommandsListException>());
+            Assert.That(() => roverSerive.ValidateAndExecuteCommandsFromCommandsString(commandsString),Throws.Exception.TypeOf<InvalidCommandsListException>());
+        }
+
+        [Test]
+        public void GetPossition_CallsGetRoverCurrentPositionOnce()
+        {
+            var roverMock = new Mock<IRover>();
+            var roverSerive = new RoverService(roverMock.Object);
+
+            roverSerive.GetPossition();
+
+            roverMock.VerifyGet(x => x.CurrentPosition, Times.Once);
+
         }
     }
 }
