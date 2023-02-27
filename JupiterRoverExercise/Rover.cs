@@ -1,4 +1,6 @@
-﻿namespace JupiterRoverExercise;
+﻿using System.Text.Json.Serialization;
+
+namespace JupiterRoverExercise;
 
 public interface IRover
 {
@@ -88,6 +90,7 @@ public enum RotationCommand
     L
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Direction
 {
     N,
