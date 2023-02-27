@@ -15,6 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jupiter Rover API", Version = "v1" });
+    var filePath = Path.Combine(AppContext.BaseDirectory, "JupiterRoverExercise.xml");
+    c.IncludeXmlComments(filePath);
 });
 
 //Setup Text.Json serializer
@@ -53,11 +55,11 @@ app.MapPost("rover/possition/reset", (IRoverService roverService) =>
       Summary = "Reset rover possition to the default (X: 0 ,Y: 0 ,Direction: N)"
   });
 
-app.MapPost("rover/commands/bulk", (string commands, IRoverService roverService) =>
+app.MapPost("rover/commands/bulk", (CommandsModel commandsModel, IRoverService roverService) =>
 {
     try
     {
-        roverService.ValidateAndExecuteCommandsFromCommandsString(commands);
+        roverService.ValidateAndExecuteCommandsFromCommandsString(commandsModel.Commands);
     }
     catch (InvalidCommandsListException invalidCommandsListException)
     {
