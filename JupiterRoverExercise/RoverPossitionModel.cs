@@ -1,6 +1,23 @@
 ﻿namespace JupiterRoverExercise
 {
-    public record struct RoverPossitionModel(int X, int Y, Direction Direction);
+    public class RoverPossitionModel
+    {
+        /// <summary>
+        /// X coordinate of current rover location 
+        /// </summary>
+        /// <example>1</example>
+        public int X { get; set; }
+        /// <summary>
+        /// Y coordinate of current rover location 
+        /// </summary>
+        /// <example>-1</example>
+        public int Y { get; set; }
+        /// <summary>
+        /// The direction rover is currently facing
+        /// </summary>
+        /// <example>N</example>
+        public Direction Direction { get; set; }
+    }
    
     public static class RoverPossitionModelExtentions
     {
